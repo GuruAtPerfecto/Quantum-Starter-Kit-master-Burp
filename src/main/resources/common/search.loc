@@ -1,0 +1,18 @@
+#locator repository for search page
+search.text.box = {\"locator\":\"name=q\",\"desc\":\"Search Text Box\"}
+search.option = {\"locator\":\"xpath=(//*[text()='%s'])[1]",\"desc\":\"search options in google\"}
+search.result.link = {\"locator\":\"partialLink=%s",\"desc\":\"search results partial link in google\"}
+#The below sample syntax used below is called alternate locator strategy. The element will be searched using the first locator and if there is no element then the second locator will be tried.
+#search.button=["xpath=//input[@aria-label='Google Search']","xpath=//button[@aria-label='Google Search']"]
+
+login.text.username=id=exampleInputEmail1
+login.text.password=id=exampleInputPassword1
+login.btn.loginbtn=xpath=//*[@id="main-content"]/form/button
+
+
+exptrackerweb.txt.username=xpath=//*[@id="login_email"]/input
+exptrackerweb.txt.password=xpath=//*[@id="login_password"]/input
+exptrackerweb.btn.loginbtn=xpath=//*[@id="login_login_btn"]
+
+exptrackerweb.btn.hamburgbtn=xpath=/html/body/app-root/ion-app/ion-split-pane/ion-router-outlet/app-expense-list/ion-header/ion-toolbar/ion-buttons
+exptrackerweb.btn.logourbtn=xpath=/html/body/app-root/ion-app/ion-split-pane/ion-menu/ion-content/ion-list/ion-menu-toggle[4]/ion-item/ion-icon

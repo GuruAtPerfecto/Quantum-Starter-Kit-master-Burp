@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testdata>
+	<quantum>
+		<fw>Introducing Quantum Framework</fw>
+	</quantum>
+	<demo>
+		<websearch>
+			<dataset>
+				<recId>1</recId>
+				<searchKey>perfecto mobile quantum</searchKey>
+				<searchResult>perfecto</searchResult>
+			</dataset>
+			<dataset>
+				<recId>2</recId>
+				<searchKey>perfecto mobile quantum</searchKey>
+				<searchResult>Quantum</searchResult>
+			</dataset>
+		</websearch>
+	</demo>
+</testdata>
