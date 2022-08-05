@@ -8,7 +8,10 @@ import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
+import org.apache.commons.lang3.StringUtils;
 import org.openqa.selenium.OutputType;
 
 import com.perfecto.reportium.client.ReportiumClient;
@@ -97,13 +100,21 @@ public class CommonStepsDefs {
 	public static void scanAndDownloadReport() throws Exception {
 		if(ConfigurationManager.getBundle().getString("includeSecurityTests", "false").equalsIgnoreCase("true")) {
 
-			String AUTUrl = (String) ConfigurationManager.getBundle().getProperty("AUTUrl");
+			//String AUTUrl = (String) ConfigurationManager.getBundle().getProperty("AUTUrl");
+			String ResultString = null;
+			
+			String URLString = DeviceUtils.getQAFDriver().getCurrentUrl();
 
-			//AUTUrl = DeviceUtils.getQAFDriver().getCurrentUrl();
+			Pattern regex = Pattern.compile("(http):\\/\\/(.+?)\\/");
+			Matcher regexMatcher = regex.matcher(URLString);
+			if (regexMatcher.find()) {
+				ResultString = regexMatcher.group();
+				System.out.println("url1 = " + ResultString);
+			}
 
-			getBurpClient().includeInScope(AUTUrl);
-			getBurpClient().spider(AUTUrl);
-			getBurpClient().scan(AUTUrl);
+			getBurpClient().includeInScope(StringUtil.chop(ResultString));
+			getBurpClient().spider(StringUtil.chop(ResultString));
+			getBurpClient().scan(StringUtil.chop(ResultString));
 
 			System.out.println("Status = " + getBurpClient().getScannerStatus());
 
@@ -115,7 +126,7 @@ public class CommonStepsDefs {
 				Thread.sleep(3000);
 				count += 1;
 				//some times tools struck with 0 status. Closing after 20 seconds
-				if (count >= 20)
+				if (count >= 30)
 					break;
 			}
 
@@ -128,8 +139,8 @@ public class CommonStepsDefs {
 			File createDir = new File("burp/" + currentTestName  + "_" +  date);
 			createDir.mkdir();
 
-			getBurpClient().getReportData(ReportType.HTML, AUTUrl, "burp/" + currentTestName  + "_" +  date + "/BurpReport_" + date + ".html" );
-			ScanIssueList IssueList = getBurpClient().getScanIssues(AUTUrl);
+			getBurpClient().getReportData(ReportType.HTML, StringUtil.chop(ResultString), "burp/" + currentTestName  + "_" +  date + "/BurpReport_" + date + ".html" );
+			ScanIssueList IssueList = getBurpClient().getScanIssues(StringUtil.chop(ResultString));
 
 			reportSecurityIssues(IssueList);
 

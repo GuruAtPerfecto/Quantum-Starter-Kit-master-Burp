@@ -1,6 +1,5 @@
 @BurpSecurityTest
-Feature: Appium Example With Automated Security Scan Feature
-  #Sample Test Scenario Description
+Feature: Automated Security Scan Using Burp tool Feature
 
 	@WebGoatSecurityTest_LoginPage
 	Scenario: Verify WebGoat login Page with Automated Security Scan using Burp
